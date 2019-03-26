@@ -1,0 +1,350 @@
+{
+  "input_datatypes": [
+    {
+      "name": "bastionhost",
+      "label": "Bastion Data"
+    }
+  ],    
+  "output_datatypes": [
+    {
+      "name": "com.ibm.cloud.cloudconnections.ICP",
+      "dataobject": {
+        "name": "${template_input_params.icp_cluster_name}",
+        "attributes": [
+          {
+            "name": "username",
+            "value": "${template_input_params.icp_admin_user}"
+          },
+          {
+            "name": "password",
+            "value": "${template_input_params.icp_admin_password}"
+          },
+          {
+            "name": "ICP_server",
+            "value": "${template_output_params.ibm_cloud_private_master_ip}"
+          }
+        ]
+      }
+    }
+  ],  
+  "input_groups": [   
+    {
+      "name": "cloud",
+      "label": "Cloud Input Variables"
+    },
+    {
+      "name": "generalvmtemplate",
+      "label": "IBM Cloud Private Template Settings"
+    },
+    {
+      "name": "virtualmachine",
+      "label": "Virtual Machine Input Settings"
+    }
+	],
+	"output_groups": [{
+		"name": "content_template_output",
+		"label": "Outputs"
+	}],
+  "template_input_params": [ 
+    {
+      "name": "vm_name",
+      "default": "",
+      "description": "Single Node Hostname ",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "Single Node Hostname",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "vm_memory",
+      "description": "Single Node Node Memory Allocation (mb)",
+      "default": "32768",
+      "type": "string",
+      "required": true,
+      "secured": false,
+			"label": "Single Node Memory Allocation (mb)",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "vm_vcpu",
+      "description": "Single Node vCPU Allocation",
+      "default": "16",
+      "type": "string",
+      "required": true,
+      "secured": false,
+			"label": "Single Node vCPU Allocation",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+        "name": "vm_ipv4_address",
+        "description": "Single Node IP Address",
+        "type": "string",
+        "required": true,
+        "secured": false,
+        "label": "Single Node IP",
+        "hidden": false,
+        "immutable": false,
+        "group_name": "virtualmachine",
+        "regex": "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]).){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$",
+        "regexdesc": "Provide a Valid IP address for the Virtual Machine"
+    },
+    {
+      "name": "vm_ipv4_gateway",
+      "description": "Single Node IP Gateway Address",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "Single Node IP Gateway",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "virtualmachine",
+      "regex": "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]).){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$",
+      "regexdesc": "Provide a Valid IP address for the Virtual Machine Gateway"
+    },
+    {
+      "name": "vm_ipv4_prefix_length",
+      "description": "Integer value between 1 and 32 for the prefix length, CIDR, to use when statically assigning an IPv4 address",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "Single Node IP Netmask (CIDR)",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "virtualmachine",
+      "regex": "^([8-9]|[1-2][0-9]|3[0-2])$"
+    },
+    {
+      "name": "vm_disk1_datastore",
+      "description": "Virtual Machine Datastore Name - Disk 1",
+      "default": "EasyTierLUN",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "Single Node Datastore Name",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "generalvmtemplate"
+    },
+    {
+      "name": "vm_template",
+      "description": "Virtual Machine Template Name",
+      "type": "string",
+      "required": true,
+      "secured": false,
+			"label": "Single Node Template Name",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "generalvmtemplate"
+    },
+    {
+      "name": "vm_os_user",
+      "description": "The user name to use while configuring the IBM Cloud Private Single Node.",
+      "default": "root",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "Single Node Template User Name",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "generalvmtemplate"
+    },
+    {
+      "name": "vm_os_password",
+      "description": "The user password to use while configuring the IBM Cloud Private Single Node.",
+      "default": "cbiadmin",
+      "type": "password",
+      "required": true,
+      "secured": true,
+      "label": "Single Node Template User Password",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "generalvmtemplate"
+    },
+    {
+      "name": "vm_clone_timeout",
+      "description": "The timeout, in minutes, to wait for the virtual machine clone to complete.",
+      "default": "120",
+      "type": "string",
+      "required": false,
+      "secured": false,
+      "label": "Virtual Machine Clone Timeout",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "generalvmtemplate"
+    },
+    {
+      "name": "vm_disk1_keep_on_remove",
+      "default": "false",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "Single Node Keep Disk on Remove",
+      "hidden": true,
+      "immutable": false,
+      "group_name": "generalvmtemplate"
+    },
+    {
+      "name": "vm_disk1_size",
+      "description": "Single Node Disk Size (GB)",
+      "default": "300",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "Single Node Disk Size (GB)",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "vm_adapter_type",
+      "description": "Network adapter type for vNIC Configuration",
+      "default": "vmxnet3",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "vSphere Network Adapter Type",
+      "hidden": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "vm_domain",
+      "description": "IBM Cloud Private Single Node Virtual Machine's domain name",
+      "default": "ddns.icc",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "Single Node Domain Name",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "generalvmtemplate"
+    },
+    {
+      "name": "vm_dns_servers",
+      "description": "List of DNS servers for the virtual network adapter. For more than one DNS, the values can be entered by adding more fields.",
+      "type": "list",
+      "required": true,
+      "secured": false,
+      "label": "Single Node DNS Servers",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "generalvmtemplate"
+    },
+    {
+      "name": "vm_dns_suffixes",
+      "description": "Name resolution suffixes for the virtual network adapter",
+      "type": "list",
+      "required": false,
+      "secured": false,
+      "label": "Single Node DNS Suffixes",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "generalvmtemplate"
+    },
+
+    {
+      "name": "vsphere_datacenter",
+      "description": "The name of a Datacenter in which to launch the IBM Cloud Private Single Node.",
+      "default": "ICC-BeiJing-01",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "vSphere DataCenter Name",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
+      "name": "vsphere_resource_pool",
+      "description": "Name of the default resource pool for the cluster. Specified as 'cluster_name/resource_pool'",
+      "default": "cluster/Resources",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "vSphere Resource Pool",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
+      "name": "vm_network_interface_label",
+      "description": "vSphere Port Group name to assign to this network interface.",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "vSphere Port Group Name",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
+      "name": "vm_folder",
+      "description": "vSphere Folder name",
+      "type": "string",
+      "required": false,
+      "secured": false,
+      "label": "vSphere Folder Name",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "cloud"
+    }
+
+  ],
+  "template_output_params": [
+    {
+      "name": "ibm_cloud_private_master_ip",
+      "type": "string",
+      "description": "IBM Cloud Private Cluster Master Node IP.",
+      "hidden": false,
+      "label": "Master IP",
+      "group_name": "content_template_output",
+      "secured": false,
+      "system": false,
+      "required": true,
+      "immutable": false
+    },
+    {
+      "name": "ibm_cloud_private_admin_url",
+      "type": "url",
+      "description": "IBM Cloud Private Cluster URL.",
+      "hidden": false,
+      "label": "IBM Cloud Private Cluster URL",
+      "shortname": "IBM Cloud Private Console",
+      "group_name": "content_template_output",
+      "secured": false,
+      "system": false,
+      "required": true,
+      "immutable": false
+    },
+    {
+      "name": "ibm_cloud_private_admin_user",
+      "description": "IBM Cloud Private Admin Username",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "IBM Cloud Private Admin Username",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "content_template_output"
+    },
+    {
+      "name": "ibm_cloud_private_admin_password",
+      "description": "IBM Cloud Private Admin Username Password",
+      "type": "string",
+      "required": true,
+      "secured": true,
+      "label": "IBM Cloud Private Admin Password",
+      "hidden": false,
+      "immutable": false,
+      "group_name": "content_template_output"
+    }
+
+  ]
+}

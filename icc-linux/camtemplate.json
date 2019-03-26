@@ -1,0 +1,62 @@
+{
+    "name": "Ubuntu16.04 or CentOS7 for ICC",
+    "description": "This template will create a Linux VM in ICC",
+    "version": "1.0",
+    "imageUrl": "",
+    "image": "",
+    "type": "prebuilt",
+    "status": "active",
+    "manifest": {
+      "template_type": "Terraform",
+      "template_format": "HCL",
+      "template_provider": "VMware vSphere",
+      "template": {
+        "templateData": "",
+        "templateVariables": "",
+        "templateOutput": ""
+      },
+      "template_source": {
+        "githubRepoUrl": "",
+        "githubAccessToken": "",
+        "relativePathToTemplateFolder": "",
+        "templateFileName": "main.tf"
+      }
+    },
+    "metadata": {
+      "displayName": "ICC Linux",
+      "providerDisplayName": "VMware vSphere",
+      "longDescription": "This template will create a Linux VM in ICC",
+      "bullets": [{
+    "title": "Clouds",
+    "description": " VMware vSphere<br>"},
+{
+    "title": "Operating Systems Supported",
+    "description": "Ubuntu 16.04<br>CentOS 7<br>"},
+{
+    "title": "Topology",
+    "description": "Linux Virtual Machine<br>"},
+{
+    "title": "Software Deployed",
+    "description": "No"},
+{
+    "title": "Default Virtual Machine Settings",
+    "description": " vCPU 16, Memory (GB) 32, Disk (GB) 400<br>"},
+{
+    "title": "Usage and Special Notes",
+    "description": "1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>2. IBM Knowledge Center for IBM Cloud Private - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSBS6K/product_welcome_cloud_private.html\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSBS6K/product_welcome_cloud_private.html</a><br>3. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a><br>"
+}
+],
+      "featuredImageUrl": "",
+      "imageUrl": "",
+      "mediumImageUrl": "",
+      "smallImageUrl": "",
+      "documentationUrl": "",
+      "termsUrl": "",
+      "media": [
+      ]
+    },
+    "toolchain": {
+      "git": "https://github.com/ibmcam/cam-toolchain"
+    }
+}
+
